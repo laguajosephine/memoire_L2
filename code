@@ -1,0 +1,12 @@
+# Première étape : data cleaning 
+
+library(tidyverse)
+library(stargazer)
+library(kableExtra)
+
+#je propose qu'on renomme le titre des data
+
+data_politics = da36602.0001
+data_politics %>% data_politics
+  select( COUNTRY, GROUP, WHICH_GROUP, COUNTRYBORN, CITIZENSHIP, LANGUAGE_HOME, POLINT_1, POLINT_2, POLATTENT_1, POLATTENT_2, POLATTENT_3, DISCUSS_ACT, DEMONST_ACT, LEAFLET_ACT, DONATE_ACT, GRAFFITI_ACT, VOTE_ACT)
+  
