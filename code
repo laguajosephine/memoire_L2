@@ -9,6 +9,14 @@ load(paste0(path, "37137-0001-Data.rda"))
 data_politics <- da36602.0001
 data_politics %>% data_politics
   select(COUNTRY, GROUP, WHICH_GROUP, COUNTRY_BORN, CITIZENSHIP, LANGUAGE_HOME, POLINT_1, POLINT_2, POLATTENT_1, POLATTENT_2, POLATTENT_3, DISCUSS_ACT, DEMONST_ACT, LEAFLETS_ACT, DONATE_ACT, GRAFFITI_ACT, VOTE_ACT)
+
 #pour virer toutes les lignes où y'a des NA
 data_politics <- data_politics %>%
   drop_na()
+
+#création de la variable Immigration
+data_politics <- data_politics %>%
+  mutate(
+         Immigration = case_when(GROUP == ((1) National majority group) ~ "Non immigré"),
+                                  )
+#on a un problème
