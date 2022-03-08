@@ -14,9 +14,14 @@ data_politics %>% data_politics
 data_politics <- data_politics %>%
   drop_na()
 
-#création de la variable Immigration
-data_politics <- data_politics %>%
+#création de la variable Immigration                                  )
+data_politics <-datapolitics %>%
   mutate(
-         Immigration = case_when(GROUP == ((1) National majority group) ~ "Non immigré"),
-                                  )
-#on a un problème
+    Immigration = case_when(COUNTRY_BORN %in% c(1,4) ~ "Non immigré",
+                                              COUNTRY_BORN == 3 ~ "Immigré deuxième génération",
+                                              COUNTRY_BORN == 6 ~ "Immigré première génération", 
+                                              COUNTRY_BORN %in% c(2,5) ~ "Métissé"
+                                              
+)
+  )
+
