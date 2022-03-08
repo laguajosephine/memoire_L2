@@ -21,6 +21,10 @@ data_politics <-datapolitics %>%
 )
   )
 #supprimer la variable COUNTRYBORN
+
+# afficher les premiers rangs de notre nouvelle base de données: 
+kable(head(data,n=10), caption= "premiers rangs des données")
+
 # analyser biais de si on drop les NA
 
 #pour virer toutes les lignes où y'a des NA
