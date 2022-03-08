@@ -19,7 +19,7 @@ cleand <-data_politics %>%
                             COUNTRY_BORN %in% c(2,5) ~ "Métisse"
 )
   )
-                                              
+ PROBLÈME ÇA MARCHE PAS DANS IMMIGRATION Y'A QUE DES NA                                           
 #supprimer la variable COUNTRYBORN
 
 # afficher les premiers rangs de notre nouvelle base de données: 
