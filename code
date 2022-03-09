@@ -22,10 +22,15 @@ cleand <-data_politics %>%
  PROBLÈME ÇA MARCHE PAS DANS IMMIGRATION Y'A QUE DES NA                                           
 #supprimer la variable COUNTRYBORN
 
+#présentation rapide de notre échantillon 
+dim(cleand)
+names(cleand)
+
 # afficher les premiers rangs de notre nouvelle base de données: 
 kable(head(cleand,n=10), caption= "premiers rangs des données")
 
-# analyser biais de si on drop les NA
+
+# analyser biais créé par suppression des NA
 
 #pour virer toutes les lignes où y'a des NA
 cleand <- cleand %>%
