@@ -3,14 +3,14 @@
 library(tidyverse)
 library(stargazer)
 library(kableExtra)
-
-#je propose qu'on renomme le titre des data
+ 
+#je propose qu'on renomme le titre des data + Manon: je pense faut qu'on garde age dans la base de données comme ça on peut dans l'analyse des NA voir si c'est genre les gens les + jeunes parce que y'a moyen qu'on ait l'impression de capter des trucs qui sont en fait explicable aussi pâr l'âge. 
 load(paste0(path, "37137-0001-Data.rda"))
 data_politics <- da36602.0001
 data_politics %>% data_politics
   select(COUNTRY, GROUP, WHICH_GROUP, COUNTRY_BORN, CITIZENSHIP, LANGUAGE_HOME, POLINT_1, POLINT_2, POLATTENT_1, POLATTENT_2, POLATTENT_3, DISCUSS_ACT, DEMONST_ACT, LEAFLETS_ACT, DONATE_ACT, GRAFFITI_ACT, VOTE_ACT)
 
-#création de la variable Immigration    attends ça marche pas mdr                              )
+#création de la variable Immigration    attends ça marche pas mdr      la variable crée c'est que des NA dedans                         )
 cleand <-data_politics %>%
   mutate(
     Immigration = case_when(COUNTRY_BORN %in% c(1,4) ~ "Non immigré",
