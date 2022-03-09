@@ -26,6 +26,9 @@ cleand <-data_politics %>%
 dim(cleand)
 names(cleand)
 
+#je rajoute une colonne à la base de données qui donne le nombre de NA par ligne 
+cleand<-cleand%>%
+  mutate(nb_na = rowSums(is.na(.)))
 # afficher les premiers rangs de notre nouvelle base de données: 
 kable(head(cleand,n=10), caption= "premiers rangs des données")
 
