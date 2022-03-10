@@ -32,7 +32,9 @@ cleand<-cleand%>%
 # on a la fréquence des différentes valeurs de nb_na
 freq(cleand$nb_na)
 summary(vectNA)
-
+kable(cleand %>% summarise_all(~sum(is.na(.))), 
+      caption = " Nombre de NA par variable:") # à analyser littéralement 
+      
 # afficher les premiers rangs de notre nouvelle base de données: 
 kable(head(cleand,n=10), caption= "premiers rangs des données")
 
