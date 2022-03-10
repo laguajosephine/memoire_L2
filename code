@@ -29,10 +29,8 @@ names(cleand)
 #je rajoute une colonne à la base de données qui donne le nombre de NA par ligne 
 cleand<-cleand%>%
   mutate(nb_na = rowSums(is.na(.)))
-# je crée un vecteur avec que la colonne qui compte les NA et après avec le tableau on voit le nombre d'occurence des différentes valeures 
-vectNA<- cleand %>%
-  pull(nb_na)
-table(vectNA)
+# on a la fréquence des différentes valeurs de nb_na
+freq(cleand$nb_na)
 summary(vectNA)
 
 # afficher les premiers rangs de notre nouvelle base de données: 
