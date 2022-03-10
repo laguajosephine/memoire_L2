@@ -10,16 +10,14 @@ data_politics <- as.tibble(da36602.0001)
 data_politics %>% data_politics
   select(COUNTRY, GROUP, AGE, WHICH_GROUP, COUNTRY_BORN, CITIZENSHIP, LANGUAGE_HOME, POLINT_1, POLINT_2, POLATTENT_1, POLATTENT_2, POLATTENT_3, DISCUSS_ACT, DEMONST_ACT, LEAFLETS_ACT, DONATE_ACT, GRAFFITI_ACT, VOTE_ACT)
 
-#création de la variable Immigration    attends ça marche pas mdr      la variable crée c'est que des NA dedans                         )
+#création de la variable Immigration   -> ça MARCHE
 cleand <-data_politics %>%
   mutate(
-    Immigration = case_when(COUNTRY_BORN %in% c(1,4) ~ "Non immigré",
-                            COUNTRY_BORN == 3 ~ "Immigré deuxième génération",
-                            COUNTRY_BORN == 6 ~ "Immigré première génération",  
-                            COUNTRY_BORN %in% c(2,5) ~ "Métisse"
-)
-  )
- PROBLÈME ÇA MARCHE PAS DANS IMMIGRATION Y'A QUE DES NA                                           
+    Immigration = case_when(COUNTRY_BORN == "(1) I was born in (country) and so were my parents"  |  COUNTRY_BORN == "(4) I was born in another country but both my parents were born in (country)" ~ "Non immigré",
+                            COUNTRY_BORN == "(3) I was born in (country) but both my parents were born in another country" ~ "Immigré deuxième génération",
+                            COUNTRY_BORN == "(6) I was born in another country and so were my parents" ~ "Immigré première génération",  
+                            COUNTRY_BORN == "(2) I was born in (country) but one of my parents was born in another country"  |  COUNTRY_BORN == "(5) I was born in another country but one of my parents was born in (country)" ~ "Métisse"))
+View(cleand)                                       
 #supprimer la variable COUNTRYBORN
 
 #présentation rapide de notre échantillon 
