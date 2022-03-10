@@ -33,6 +33,7 @@ cleand<-cleand%>%
 vectNA<- cleand %>%
   pull(nb_na)
 table(vectNA)
+summary(vectNA)
 
 # afficher les premiers rangs de notre nouvelle base de données: 
 kable(head(cleand,n=10), caption= "premiers rangs des données")
