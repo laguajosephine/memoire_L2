@@ -45,3 +45,8 @@ kable(head(cleand,n=10), caption= "premiers rangs des données")
 cleand <- cleand %>%
   drop_na()
 
+#ANALYSE DE NA
+
+cleand_group <- cleand %>%
+  group_by(COUNTRY, Immigration) %>%
+  summarise()
