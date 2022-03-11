@@ -67,3 +67,26 @@ kable(summary(cleand))
 cleand_group <- cleand %>%
   group_by(COUNTRY, Immigration) %>%
   summarise()
+
+descriptive_data <- cleand %>%
+  pivot_longer(c(POLINT_1,POLINT_2,POLATTENT_1,POLATTENT_2, POLATTENT_3, DISCUSS_ACT), names_to = "Variable", values_to = "Value")%>%
+  group_by(Variable,COUNTRY, Immigration)%>%
+  summarise(Min = min(Value),
+            Q1 = quantile(Value, 1/4),
+            Median = median(Value),
+            Mean = mean(Value),
+            Q3 = quantile(Value, 3/4),
+            Max = max(Value)) %>%
+  ungroup()
+
+descriptive_data %>%
+  filter( COUNTRY == Italy) %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Italy")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+  
