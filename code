@@ -46,6 +46,17 @@ kable(head(cleand,n=10), caption= "premiers rangs des données")
 
 # analyser biais créé par suppression des NA
 
+cleand <- cleand %>%
+  mutate(
+    Nombre = case_when(nb_na == 0 ~ 0
+                       , TRUE ~ 1)
+         )
+ 
+ cleand_group <- cleand %>%
+  group_by(COUNTRY, Immigration)%>%
+  summarise(sum(Nombre))
+  
+
 #pour virer toutes les lignes où y'a des NA
 cleand <- cleand %>%
   drop_na()
