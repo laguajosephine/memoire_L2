@@ -67,6 +67,8 @@ kable(summary(cleand))
 cleand_group <- cleand %>%
   group_by(COUNTRY, Immigration) %>%
   summarise()
+  
+# DESCRIPTIVE STATISTICS
 
 descriptive_data <- cleand %>%
   pivot_longer(c(POLINT_1,POLINT_2,POLATTENT_1,POLATTENT_2, POLATTENT_3, DISCUSS_ACT), names_to = "Variable", values_to = "Value")%>%
@@ -79,6 +81,8 @@ descriptive_data <- cleand %>%
             Max = max(Value)) %>%
   ungroup()
 
+#ITALIE
+
 descriptive_data %>%
   filter( COUNTRY == "(5) Italy") %>%
   select(-c(Variable, COUNTRY)) %>%
@@ -90,3 +94,108 @@ descriptive_data %>%
   pack_rows("POLATTENT_3", 17, 20) %>%
   pack_rows("DISCUSS_ACT", 21, 24)
   
+#ENGLAND
+
+descriptive_data %>%
+  filter( COUNTRY == "(1) England") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "England")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+  
+# BELGIQUE
+
+descriptive_data %>%
+  filter( COUNTRY == "(2) Belgium (French-speaking)") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Belgium")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+# (3) Czech Republic
+
+descriptive_data %>%
+  filter( COUNTRY == "(3) Czech Republic") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Czech Republic")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+# GERMANY
+
+descriptive_data %>%
+  filter( COUNTRY == "(4) Germany") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Germany")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+
+# PORTUGAL
+
+descriptive_data %>%
+  filter( COUNTRY == "(6) Portugal") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Portugal")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+# SWEDEN
+
+descriptive_data %>%
+  filter( COUNTRY == "(7) Sweden") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Sweden")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+# TURKEY
+
+descriptive_data %>%
+  filter( COUNTRY == "(7) Turkey") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Turkey")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
+# NORTHERN IRELAND
+
+descriptive_data %>%
+  filter( COUNTRY == "(9) Northern Ireland") %>%
+  select(-c(Variable, COUNTRY)) %>%
+  kable(., caption = paste("Country", "Northern Ireland")) %>%
+  pack_rows("POLINT_1", 1, 4) %>%
+  pack_rows("POLINT_2", 5, 8) %>%
+  pack_rows("POLATTENT_1", 9, 12) %>%
+  pack_rows("POLATTENT_2", 13, 16) %>%
+  pack_rows("POLATTENT_3", 17, 20) %>%
+  pack_rows("DISCUSS_ACT", 21, 24)
+
