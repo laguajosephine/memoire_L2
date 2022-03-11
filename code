@@ -80,7 +80,7 @@ descriptive_data <- cleand %>%
   ungroup()
 
 descriptive_data %>%
-  filter( COUNTRY == Italy) %>%
+  filter( COUNTRY == "(5) Italy") %>%
   select(-c(Variable, COUNTRY)) %>%
   kable(., caption = paste("Country", "Italy")) %>%
   pack_rows("POLINT_1", 1, 4) %>%
