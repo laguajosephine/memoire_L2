@@ -22,16 +22,21 @@ View(cleand)
 
 #présentation rapide de notre échantillon 
 dim(cleand)
-names(cleand)
+kable(names(cleand))
 
 #je rajoute une colonne à la base de données qui donne le nombre de NA par ligne 
 cleand<-cleand%>%
   mutate(nb_na = rowSums(is.na(.)))
+  
 # on a la fréquence des différentes valeurs de nb_na
+
+library(questionr)
+kable(freq(cleand$nb_na))
+
 vectNA<-cleand%>%
   select(nb_na)
 table(vectNA)
-summary(vectNA)
+kable(summary(vectNA))
 kable(cleand %>% summarise_all(~sum(is.na(.))), 
       caption = " Nombre de NA par variable:") # à analyser littéralement 
       
@@ -44,6 +49,7 @@ kable(head(cleand,n=10), caption= "premiers rangs des données")
 #pour virer toutes les lignes où y'a des NA
 cleand <- cleand %>%
   drop_na()
+kable(summary(cleand))
 
 #ANALYSE DE NA
 
