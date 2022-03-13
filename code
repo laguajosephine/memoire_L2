@@ -199,3 +199,22 @@ descriptive_data %>%
   pack_rows("POLATTENT_3", 17, 20) %>%
   pack_rows("DISCUSS_ACT", 21, 24)
 
+#il faut refaire ça mais avec les autres variables d'investissement 
+
+#création de deux variables: une qui somme valeurs des variables d'implication politique (information) et l'autre qui renvoie ça 
+
+cleand2<- subset(cleand, COUNTRY=="(6) Portugal"|COUNTRY=="(7) Sweden" )
+  
+simpinfo <-cleand2%>%
+  select(POLINT_1,POLINT_2,POLATTENT_1,POLATTENT_2, POLATTENT_3, DISCUSS_ACT)
+simpinfo<-simpinfo%>%
+  mutate(imp_info = rowSums(simpinfo))
+#ça marche woop woop 
+#mtn il faut faire un histogramme de la colonne imp_info et immigration en suède et au portugal 
+interm<- cleand2%>%
+  select(COUNTRY,Immigration)
+
+#créer une donnée qui a juste COUNTRY Immigration + la variable simpinfo
+datah<-cbind(interm,simpinfo)
+library(ggplot2)
+ggplot()+ geom_col(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))
