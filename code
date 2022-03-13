@@ -228,3 +228,7 @@ simpaction<-simpaction%>%
 #mtn il faut faire un histogramme de la colonne imp_action et immigration en suède et au portugal 
 datah2<-cbind(interm,simpaction)
 ggplot()+ geom_col(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))
+
+#faire un graphe qui montre distribution des groupes dans les pays 
+ggplot(cleand2, aes(x = Immigration, fill = COUNTRY)) + ylab("Nombre d'individus") +
+  geom_bar(stat = "count", position = position_dodge(width = .8), width = .7, alpha = .85)
