@@ -218,3 +218,4 @@ interm<- cleand2%>%
 datah<-cbind(interm,simpinfo)
 library(ggplot2)
 ggplot()+ geom_col(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))
+#il faut mettre titres et légendes
