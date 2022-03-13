@@ -217,7 +217,7 @@ interm<- cleand2%>%
 #créer une donnée qui a juste COUNTRY Immigration + la variable simpinfo
 datah<-cbind(interm,simpinfo)
 library(ggplot2)
-ggplot()+ geom_col(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))
+ggplot(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))+ geom_col(position = position_dodge(width = .8), width = .7)
 
 # on refait la même chose pour implication polituqe action
 simpaction <-cleand2%>%
@@ -225,10 +225,10 @@ simpaction <-cleand2%>%
 simpaction<-simpaction%>%
   mutate(imp_action = rowSums(simpaction))
 #ça marche woop woop 
-
 #mtn il faut faire un histogramme de la colonne imp_action et immigration en suède et au portugal 
 datah2<-cbind(interm,simpaction)
-ggplot()+ geom_col(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))
+ggplot(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))+ geom_col(position = position_dodge(width = .8), width = .7)
+#ggplot()+ geom_col(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))
 
 #faire un graphe qui montre distribution des groupes dans les pays 
 ggplot(cleand2, aes(x = Immigration, fill = COUNTRY)) + ylab("Nombre d'individus") +
