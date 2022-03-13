@@ -219,3 +219,12 @@ datah<-cbind(interm,simpinfo)
 library(ggplot2)
 ggplot()+ geom_col(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))
 #il faut mettre titres et légendes
+# on refait la même chose pour implication polituqe action
+simpaction <-cleand2%>%
+  select(DEMONST_ACT, LEAFLETS_ACT, DONATE_ACT, GRAFFITI_ACT, VOTE_ACT)
+simpaction<-simpaction%>%
+  mutate(imp_action = rowSums(simpaction))
+#ça marche woop woop 
+#mtn il faut faire un histogramme de la colonne imp_action et immigration en suède et au portugal 
+datah2<-cbind(interm,simpaction)
+ggplot()+ geom_col(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))
