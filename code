@@ -202,8 +202,7 @@ descriptive_data %>%
 #il faut refaire ça mais avec les autres variables d'investissement 
 
 #création de deux variables: une qui somme valeurs des variables d'implication politique (information) et l'autre qui renvoie ça 
-
-cleand2<- subset(cleand, COUNTRY=="(6) Portugal"|COUNTRY=="(7) Sweden" )
+cleand2<- subset(cleand, COUNTRY=="(1) England"|COUNTRY=="(7) Sweden"| COUNTRY=="(3) Czech Republic" )
   
 simpinfo <-cleand2%>%
   select(POLINT_1,POLINT_2,POLATTENT_1,POLATTENT_2, POLATTENT_3, DISCUSS_ACT)
@@ -217,7 +216,10 @@ interm<- cleand2%>%
 #créer une donnée qui a juste COUNTRY Immigration + la variable simpinfo
 datah<-cbind(interm,simpinfo)
 library(ggplot2)
-ggplot(data=datah, aes(x=Immigration, y=imp_info, fill=COUNTRY))+ geom_col(position = position_dodge(width = .8), width = .7)
+mean1<-datah%>% # on calcule la moyenne de imp_action par pays et catégorie d'immigration avant de tracer le graphe
+  group_by(COUNTRY, Immigration)%>%
+  summarize(Moyenne1= mean(imp_info))
+ggplot(data=mean1, aes(x=Immigration, y=Moyenne1, fill=COUNTRY))+ylab("Moyenne de l'implication par l'information")+ xlab("Catégorie d'immigration")+ geom_col(position = position_dodge(width = .8), width = .7) + # max d'implication = 30 car 6 variables sur 5
 
 # on refait la même chose pour implication polituqe action
 simpaction <-cleand2%>%
@@ -227,9 +229,12 @@ simpaction<-simpaction%>%
 #ça marche woop woop 
 #mtn il faut faire un histogramme de la colonne imp_action et immigration en suède et au portugal 
 datah2<-cbind(interm,simpaction)
-ggplot(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))+ geom_col(position = position_dodge(width = .8), width = .7)
+mean2<-datah2%>% # on calcule la moyenne de imp_action par pays et catégorie d'immigration avant de tracer le graphe
+  group_by(COUNTRY, Immigration)%>%
+  summarize(Moyenne2= mean(imp_action))
+ggplot(data=mean2, aes(x=Immigration, y=Moyenne2, fill=COUNTRY))+ylab("Moyenne de l'implication par l'action")+ xlab("Catégorie d'immigration") + geom_col(position = position_dodge(width = .8), width = .7) #max d'implication= 25 car 5 variables sur 5 
 #ggplot()+ geom_col(data=datah2, aes(x=Immigration, y=imp_action, fill=COUNTRY))
 
 #faire un graphe qui montre distribution des groupes dans les pays 
-ggplot(cleand2, aes(x = Immigration, fill = COUNTRY)) + ylab("Nombre d'individus") +
-  geom_bar(stat = "count", position = position_dodge(width = .8), width = .7, alpha = .85)
+
+ggplot(cleand2, aes(x = Immigration, fill = COUNTRY)) + ylab("Nombre d'individus") +geom_bar(stat = "count", position = position_dodge(width = .8), width = .7, alpha = .85)
