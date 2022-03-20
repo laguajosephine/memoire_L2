@@ -238,3 +238,10 @@ ggplot(data=mean2, aes(x=Immigration, y=Moyenne2, fill=COUNTRY))+ylab("Moyenne d
 #faire un graphe qui montre distribution des groupes dans les pays 
 
 ggplot(cleand2, aes(x = Immigration, fill = COUNTRY)) + ylab("Nombre d'individus") +geom_bar(stat = "count", position = position_dodge(width = .8), width = .7, alpha = .85)
+
+interm2<- simpaction%>%
+  select(imp_action)
+cleand2<-cbind(cleand2,interm2)
+interm3<- simpinfo%>%
+  select(imp_info)
+cleand2<-cbind(cleand2,interm3)
