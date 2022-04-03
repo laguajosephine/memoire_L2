@@ -354,3 +354,35 @@ ggplot(cleand2M, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height
 #Rep Tchèque Mixte avec l'action
 ggplot(cleand2M, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_action), 
               method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en République Tchèque avec l'action ")
+              
+
+#03/04/2022
+#ajouter im_action et imp_info à cleand2
+cleand2<- cleand2 %>%
+  mutate(imp_info = rowSums(.[7:12]), imp_action = rowSums(.[13:17]))
+
+# info pour l'angleterre
+data_angleterre <- subset(cleand2, COUNTRY=="(1) England")         
+fit1 <- lm(imp_info ~ Immigration, data_angleterre)
+summary(fit1)
+#action pour l'angleterre
+fit2 <- lm(imp_action ~ Immigration, data_angleterre)
+summary(fit2)
+
+#info pour la suède
+data_suede <- subset(cleand2,COUNTRY=="(7) Sweden")
+fit3 <- lm(imp_info ~ Immigration, data_suede)
+summary(fit3)
+#action pour la suède
+fit4 <- lm(imp_action ~ Immigration, data_suede)
+summary(fit4)
+
+#info pour la république tchèque
+data_tcheque <- subset(cleand2,COUNTRY=="(3) Czech Republic")
+fit5 <- lm(imp_info ~ Immigration, data_tcheque)
+summary(fit5)
+#action pour la république tchèque
+fit6 <- lm(imp_action ~ Immigration, data_tcheque)
+summary(fit6)
+
+#tout ça nous donne les coeff
