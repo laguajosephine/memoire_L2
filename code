@@ -363,26 +363,27 @@ cleand2<- cleand2 %>%
 
 # info pour l'angleterre
 data_angleterre <- subset(cleand2, COUNTRY=="(1) England")         
-fit1 <- lm(imp_info ~ Immigration, data_angleterre)
-summary(fit1)
+fit1 <- stargazer(lm(imp_info ~ Immigration, data_angleterre), type = "text")
+#summary(fit1)
 #action pour l'angleterre
-fit2 <- lm(imp_action ~ Immigration, data_angleterre)
-summary(fit2)
+fit2 <- stargazer(lm(imp_action ~ Immigration, data_angleterre), type = "text")
+#summary(fit2)
 
 #info pour la suède
 data_suede <- subset(cleand2,COUNTRY=="(7) Sweden")
-fit3 <- lm(imp_info ~ Immigration, data_suede)
-summary(fit3)
+fit3 <- stargazer(lm(imp_info ~ Immigration, data_suede), type = "text")
+#summary(fit3)
 #action pour la suède
-fit4 <- lm(imp_action ~ Immigration, data_suede)
-summary(fit4)
+fit4 <- stargazer(lm(imp_action ~ Immigration, data_suede), type = "text")
+#summary(fit4)
 
 #info pour la république tchèque
 data_tcheque <- subset(cleand2,COUNTRY=="(3) Czech Republic")
-fit5 <- lm(imp_info ~ Immigration, data_tcheque)
-summary(fit5)
+fit5 <- stargazer(lm(imp_info ~ Immigration, data_tcheque), type = "text")
+#summary(fit5)
 #action pour la république tchèque
-fit6 <- lm(imp_action ~ Immigration, data_tcheque)
-summary(fit6)
+fit6 <- stargazer(lm(imp_action ~ Immigration, data_tcheque), type = "text")
+#summary(fit6)
 
-#tout ça nous donne les coeff
+
+#tout ça nous donne les coeff: j'ai changé: c'est plus beau avec stargazer que avec summary
