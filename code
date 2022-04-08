@@ -245,145 +245,49 @@ cleand2<-cbind(cleand2,interm2)
 interm3<- simpinfo%>%
   select(imp_info)
 cleand2<-cbind(cleand2,interm3)
+#regression time 
+# en premier on va recoder, je propose on recode imp action et impinfo comme ça ça marche mieux dans l'organisation du propos
 
-#on crée les dummy variables
-cleand2NI<-cleand2%>%
-  mutate (Immigration= ifelse(Immigration=="Non immigré", 1, 0))
-cleand21G<-cleand2%>%
-  mutate (Immigration= ifelse(Immigration=="Immigré première génération", 1, 0))
-cleand22G<-cleand2%>%
-  mutate (Immigration= ifelse(Immigration=="Immigré deuxième génération", 1, 0))
-cleand2M<-cleand2%>%
-  mutate (Immigration= ifelse(Immigration=="Mixte", 1, 0))
-
-# Angleterre non immigré avec impinfo 
-ggplot(cleand2NI, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en Angleterre avec l'info")
-
-#angleterre non immigré avec l'action
-ggplot(cleand2NI, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en Angleterre avec l'action")
-
-#Angleterre première génération d'immigré avec l'info 
-ggplot(cleand21G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en Angleterre avec l'info")
-
-ggplot(cleand21G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en Angleterre avec l'action")
-
-# Angleterren deuxième génération avec l'info
-ggplot(cleand22G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression deuxième génération en Angleterre avec l'info")
-
-#avec l'action
-ggplot(cleand22G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression deuxième génération en Angleterre avec l'action")
-
-# Angleterre mixtes avec l'info 
-ggplot(cleand2M, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en Angleterre avec l'info")
-
-#avec l'action
-ggplot(cleand2M, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(1) England" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en Angleterre avec l'action")
-
-# en Suède Non immigré avec l'info 
-ggplot(cleand2NI, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en Suède avec l'info")
-
-#Suède non immigré action
-
-ggplot(cleand2NI, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_action ), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en Suède avec l'action")
-
-# Suède 1ère génération avec l'info 
-ggplot(cleand21G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en Suède avec l'info")
-
-#Suède avec 1ème génération avec l'action
-ggplot(cleand21G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en Suède avec l'action")
-
-# en Suède 2ème génération avec l'info 
-ggplot(cleand22G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression deuxième génération en Suède avec l'info")
-
-#Suède 2 G avec l'action
-ggplot(cleand22G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression deuxième génération en Suède avec l'action")
-
-# en Suède Mixte avec l'info 
-ggplot(cleand2M, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en Suède avec l'info")
-
-#Suède Mixte avec l'action 
-ggplot(cleand2M, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(7) Sweden" ), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en Suède avec l'action")
-
-#en République Tchèque Non immigré et info 
-
-ggplot(cleand2NI, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en République Tchèque avec l'info")
-
-# Rép Tchèque Non immigré et action 
-ggplot(cleand2NI, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2NI, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Non immigré en République Tchèque avec l'action")
-
-#en République Tchèque 1 génération avec l'info 
-ggplot(cleand21G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en République Tchèque avec l'info")
-
-# République Tchèque 1G avce l'action
-
-ggplot(cleand21G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand21G, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression première génération en République Tchèque avec l'action")
-
-#en République Tchèque 2 génération avec l'info 
-ggplot(cleand22G, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression dexuième génération en République Tchèque avec l'info")
-
-#en république Tchèque 2 génération avec l'action 
-ggplot(cleand22G, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand22G, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression dexuième génération en République Tchèque avec l'action")
-
-
-#en République Tchèque Mixte avec l'info 
-ggplot(cleand2M, aes(x=Immigration, y=imp_info))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_info), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en République Tchèque avec l'info")
-
-#Rep Tchèque Mixte avec l'action
-ggplot(cleand2M, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=filter(cleand2M, COUNTRY=="(3) Czech Republic"), aes(x = Immigration, y = imp_action), 
-              method = "lm", se = F, color = "#014D64")+ggtitle("Régression mixte en République Tchèque avec l'action ")
-              
-
-#03/04/2022
-#ajouter im_action et imp_info à cleand2
-cleand2<- cleand2 %>%
-  mutate(imp_info = rowSums(.[7:12]), imp_action = rowSums(.[13:17]))
+#on recode 
+cleand3<-cleand2%>%
+  mutate (imp_action= ifelse(imp_action > 10, 1, 0))
+cleand3<-cleand2%>%
+  mutate (imp_action= ifelse(imp_info > 20, 1, 0))
 
 # info pour l'angleterre
-data_angleterre <- subset(cleand2, COUNTRY=="(1) England")         
+data_angleterre <- subset(cleand3, COUNTRY=="(1) England")         
 fit1 <- stargazer(lm(imp_info ~ Immigration, data_angleterre), type = "text")
-#summary(fit1)
+
 #action pour l'angleterre
 fit2 <- stargazer(lm(imp_action ~ Immigration, data_angleterre), type = "text")
-#summary(fit2)
 
 #info pour la suède
-data_suede <- subset(cleand2,COUNTRY=="(7) Sweden")
+data_suede <- subset(cleand3,COUNTRY=="(7) Sweden")
 fit3 <- stargazer(lm(imp_info ~ Immigration, data_suede), type = "text")
-#summary(fit3)
+
 #action pour la suède
 fit4 <- stargazer(lm(imp_action ~ Immigration, data_suede), type = "text")
-#summary(fit4)
 
 #info pour la république tchèque
-data_tcheque <- subset(cleand2,COUNTRY=="(3) Czech Republic")
+data_tcheque <- subset(cleand3,COUNTRY=="(3) Czech Republic")
 fit5 <- stargazer(lm(imp_info ~ Immigration, data_tcheque), type = "text")
-#summary(fit5)
+
 #action pour la république tchèque
 fit6 <- stargazer(lm(imp_action ~ Immigration, data_tcheque), type = "text")
-#summary(fit6)
+
+#là on boit que imp action plus significatif que imp info donc on se concentre sur l'analyse de imp action et on les représente graphiquement 
+
+#action pour l'angleterre
+ggplot(data_angleterre, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data= data_angleterre, aes(x = Immigration, y = imp_action), 
+              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Angleterre avec l'action")
 
 
-#tout ça nous donne les coeff: j'ai changé: c'est plus beau avec stargazer que avec summary
+#action pour la suède
+ggplot(data_suede, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=data_suede, aes(x = Immigration, y = imp_action), 
+              method = "lm", se = F, color = "#014D64")+ggtitle("Régression Suède avec l'action")
+
+#action pour la république tchèque
+ggplot(data_tcheque, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=data_tcheque, aes(x = Immigration, y = imp_action), 
+              method = "lm", se = F, color = "#014D64")+ggtitle("Régression République Tchèque avec l'action")
+
+
