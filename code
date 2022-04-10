@@ -251,7 +251,7 @@ cleand2<-cbind(cleand2,interm3)
 #on recode 
 cleand3<-cleand2%>%
   mutate (imp_action= ifelse(imp_action > 10, 1, 0))
-cleand3<-cleand2%>%
+cleand3<-cleand3%>%
   mutate (imp_info= ifelse(imp_info > 20, 1, 0))
 
 # info pour l'angleterre
