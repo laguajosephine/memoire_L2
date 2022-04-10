@@ -291,3 +291,6 @@ ggplot(data_tcheque, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, 
               method = "lm", se = F, color = "#014D64")+ggtitle("Régression République Tchèque avec l'action")
 
 
+#causalité
+causalite1 <- stargazer(lm(imp_action ~ AGE, data_angleterre), type = "text")
+causalite2 <- stargazer(lm(imp_action ~ GENDER, data_angleterre), type = "text")
