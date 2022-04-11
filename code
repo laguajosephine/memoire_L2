@@ -245,6 +245,7 @@ cleand2<-cbind(cleand2,interm2)
 interm3<- simpinfo%>%
   select(imp_info)
 cleand2<-cbind(cleand2,interm3)
+
 #regression time 
 # en premier on va recoder, je propose on recode imp action et impinfo comme ça ça marche mieux dans l'organisation du propos
 
@@ -253,27 +254,35 @@ cleand3<-cleand2%>%
   mutate (imp_action= ifelse(imp_action > 10, 1, 0))
 cleand3<-cleand3%>%
   mutate (imp_info= ifelse(imp_info > 20, 1, 0))
+  
+#regression time 
+# en premier on va recoder, je propose on recode imp action et impinfo comme ça ça marche mieux dans l'organisation du propos
+
+cleand3$Immigration<- as.factor(cleand3$Immigration)
 
 # info pour l'angleterre
-data_angleterre <- subset(cleand3, COUNTRY=="(1) England")         
-fit1 <- stargazer(lm(imp_info ~ Immigration, data_angleterre), type = "text")
+data_angleterre <- subset(cleand3, COUNTRY=="(1) England")    
 
+fit1 <- stargazer(lm(imp_info ~ relevel(Immigration, ref ="Non immigré"), data_angleterre), type = "text")
+
+fit2<-stargazer(lm(imp_info ~  relevel(Immigration, ref ="Non immigré"), data_angleterre), type="text")
+                
 #action pour l'angleterre
-fit2 <- stargazer(lm(imp_action ~ Immigration, data_angleterre), type = "text")
+fit2 <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_angleterre), type = "text")
 
 #info pour la suède
 data_suede <- subset(cleand3,COUNTRY=="(7) Sweden")
-fit3 <- stargazer(lm(imp_info ~ Immigration, data_suede), type = "text")
+fit3 <- stargazer(lm(imp_info ~ relevel(Immigration, ref ="Non immigré"), data_suede), type = "text")
 
 #action pour la suède
-fit4 <- stargazer(lm(imp_action ~ Immigration, data_suede), type = "text")
+fit4 <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_suede), type = "text")
 
 #info pour la république tchèque
 data_tcheque <- subset(cleand3,COUNTRY=="(3) Czech Republic")
-fit5 <- stargazer(lm(imp_info ~ Immigration, data_tcheque), type = "text")
+fit5 <- stargazer(lm(imp_info ~ relevel(Immigration, ref ="Non immigré"), data_tcheque), type = "text")
 
 #action pour la république tchèque
-fit6 <- stargazer(lm(imp_action ~ Immigration, data_tcheque), type = "text")
+fit6 <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_tcheque), type = "text")
 
 #là on boit que imp action plus significatif que imp info donc on se concentre sur l'analyse de imp action et on les représente graphiquement 
 
@@ -290,7 +299,10 @@ ggplot(data_suede, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, he
 ggplot(data_tcheque, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, height = .25, alpha = .5, color = "#6794A7")+geom_smooth(data=data_tcheque, aes(x = Immigration, y = imp_action), 
               method = "lm", se = F, color = "#014D64")+ggtitle("Régression République Tchèque avec l'action")
 
-
 #causalité
 causalite1 <- stargazer(lm(imp_action ~ AGE, data_angleterre), type = "text")
 causalite2 <- stargazer(lm(imp_action ~ GENDER, data_angleterre), type = "text")
+
+
+#robustesse
+
