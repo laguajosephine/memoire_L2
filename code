@@ -303,6 +303,25 @@ ggplot(data_tcheque, aes(x=Immigration, y=imp_action))+geom_jitter(width = .25, 
 causalite1 <- stargazer(lm(imp_action ~ AGE, data_angleterre), type = "text")
 causalite2 <- stargazer(lm(imp_action ~ GENDER, data_angleterre), type = "text")
 
+jeunes <- cleand2 %>%
+  group_by(Immigration, BARRIER_1) %>%
+  summarise(nombre = n())
+jeunes
+
+femmes <- cleand2 %>%
+  group_by(Immigration, GENDER) %>%
+  summarise(nombre = n())
+femmes
+  
+parents <- cleand2 %>%
+  group_by(Immigration, SOC_NORMS_5) %>%
+  summarise(nombre = n())
+parents
+
+confiance <- cleand2 %>%
+  group_by(Immigration, TRUST_2) %>%
+  summarise(nombre = n())
+confiance
 
 #robustesse
 
