@@ -323,5 +323,19 @@ confiance <- cleand2 %>%
   summarise(nombre = n())
 confiance
 
-#robustesse
+#robustesse                                                                                                                   
+#ajout progressif des variables dans les régressions
+
+rob_angleterre <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_angleterre), type = "text",
+                            lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE, data_angleterre),
+                            lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE + GENDER, data_angleterre))
+
+rob_suede <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_suede), type = "text",
+                       lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE, data_suede),
+                       lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE + GENDER, data_suede))
+
+rob_tcheque <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_tcheque), type = "text",
+                         lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE, data_tcheque),
+                         lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE + GENDER, data_tcheque))
+
 
