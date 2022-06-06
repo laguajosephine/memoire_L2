@@ -338,4 +338,22 @@ rob_tcheque <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré
                          lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE, data_tcheque),
                          lm(imp_action ~ relevel(Immigration, ref ="Non immigré") + AGE + GENDER, data_tcheque))
 
+# redéfinition de la variable 
+
+cleand_rob<-cleand2%>%
+  mutate (imp_action= ifelse(imp_action > 12, 1, 0))
+
+cleand_rob$Immigration<- as.factor(cleand_rob$Immigration)
+
+#action pour l'angleterre
+data_angleterre_rob <- subset(cleand_rob, COUNTRY=="(1) England")    
+fit_rob_ang <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_angleterre_rob), type = "text")
+
+#action pour la suède
+data_suede_rob <- subset(cleand_rob,COUNTRY=="(7) Sweden")
+fit_rob_sue <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_suede_rob), type = "text")
+
+#action pour la république tchèque
+data_tcheque_rob <- subset(cleand_rob,COUNTRY=="(3) Czech Republic")
+fit_rob_rep <- stargazer(lm(imp_action ~ relevel(Immigration, ref ="Non immigré"), data_tcheque_rob), type = "text")
 
